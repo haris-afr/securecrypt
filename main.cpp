@@ -3,5 +3,7 @@
 using namespace std;
 
 int main(){
-	cout << "exypted";
+	string message = "hello";
+	message = vigenereDecryptor("vvvrbacp", "cover");
+	cout << message;
 }
