@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 #include "vigenere.cpp"
 #include "caesar.cpp"
@@ -9,6 +10,7 @@ using namespace std;
 
 
 int main(){
+	ofstream file;
 	string message, encrypted, key;
 	int option;
 
@@ -91,6 +93,15 @@ int main(){
 			option = 5;
 		}
 	}while(option==5);
+
+	file.open("securecrypt.txt");
+	if(file.is_open()){
+		file<<encrypted;
+		file.close();
+	}
+	else{
+		cerr<<"could not open file";
+	}
 
 	return 0;
 
