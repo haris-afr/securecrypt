@@ -11,6 +11,7 @@ using namespace std;
 int main(){
 	string message, encrypted, key;
 	int option;
+
 	do{
 		cout<<"Would You Like to Encrypt or Decrypt a Message?"<<endl;
 		cout<<"1.Encrypt"<<endl;
