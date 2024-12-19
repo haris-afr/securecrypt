@@ -30,7 +30,6 @@ string caesarDecryptor(string message){
 		int current_letter_index = 0;
 		for (int j = 0; j < 26; j++){
 			if (message[messageIndex] == alphabet[j]){
-				current_letter = alphabet[j];
 				current_letter_index = j;
 			}
 		}

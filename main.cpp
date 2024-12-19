@@ -7,12 +7,36 @@ const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','
 #include "XOREncryptorDecryptor.cpp"
 using namespace std;
 
-
+string getInput(){
+	int readoption;
+	string message;
+	ifstream file;
+	cout << "Would you like to enter the message(1) or read from the file(2)?" << endl;
+	cin >> readoption;
+	switch (readoption){
+		case 1:
+			cout<<"Please Enter The Message You'd Like To Encrypt:"<<endl;
+			cin.ignore();
+			getline(cin, message);
+			break;
+		case 2:
+			file.open("securecrypt.txt"); 
+			if (file.is_open()){
+				file >> message;	
+			}
+			else{
+				cerr << "file can't be opened" << endl;
+			}
+			break;
+	}
+	return message;
+}
 
 int main(){
 	ofstream file;
-	string message, encrypted, key;
+	string message, output, key;
 	int option;
+	int readoption;
 
 	do{
 		cout<<"Would You Like to Encrypt or Decrypt a Message?"<<endl;
@@ -20,10 +44,7 @@ int main(){
 		cout<<"2.Decrypt"<<endl;
 		cin>>option;
 		if(option==1){
-			cout<<"Please Enter The Message You'd Like To Encrypt:"<<endl;
-			cin.ignore();
-			getline(cin, message);
-			
+			message = getInput();
 			do{
 				cout<<"Please Choose The Type of Cypher You'd Like:"<<endl;
 				cout<<"1.Vingeneres Cipher"<<endl;
@@ -35,13 +56,13 @@ int main(){
 					cout<<"Please Enter The Key For The Cipher: ";
 					cin.ignore();
 					getline(cin,key);
-					encrypted = vigenereEncryptor(message, key);
+					output = vigenereEncryptor(message, key);
 					break;
 					case 2:
-					encrypted = caesarEncryptor(message);
+					output = caesarEncryptor(message);
 					break;
 					case 3:
-					encrypted = XOREncryptorDecryptor(message);
+					output = XOREncryptorDecryptor(message);
 
 					break;
 					default: 
@@ -50,13 +71,11 @@ int main(){
 				}
 			}while(option==4);
 
-			cout<<"The encrypted message is: "<<encrypted;
+			cout<<"The encrypted message is: "<<output << endl;
 		}
 
 		else if(option==2){
-			cout<<"Please Enter The Message You'd Like To decrypt:"<<endl;
-			cin.ignore();
-			getline(cin, message);
+			message = getInput(); 
 			
 			do{
 				cout<<"Please Choose The Type of Cypher You'd Like:"<<endl;
@@ -66,16 +85,17 @@ int main(){
 				cin>>option;
 				switch(option){
 					case 1:
+					
 					cout<<"Please Enter The Key For The Cipher: ";
 					cin.ignore();
 					getline(cin,key);
-					encrypted = vigenereDecryptor(message, key);
+					output = vigenereDecryptor(message, key);
 					break;
 					case 2:
-					encrypted = caesarDecryptor(message);
+					output = caesarDecryptor(message);
 					break;
 					case 3:
-					encrypted = XOREncryptorDecryptor(message);
+					output = XOREncryptorDecryptor(message);
 
 					break;
 					default: 
@@ -85,7 +105,7 @@ int main(){
 				}
 			}while(option==4);
 
-			cout<<"The decrypted message is: "<<encrypted;
+			cout<<"The decrypted message is: "<< output << endl;
 
 		}
 		else{
@@ -93,14 +113,19 @@ int main(){
 			option = 5;
 		}
 	}while(option==5);
-
-	file.open("securecrypt.txt");
-	if(file.is_open()){
-		file<<encrypted;
-		file.close();
-	}
-	else{
-		cerr<<"could not open file";
+	
+	cout << "Would you like to store your output in a file (1/0)" << endl;
+	bool outputoption;
+	cin >> outputoption;
+	if (outputoption){
+		file.open("securecrypt.txt");
+		if(file.is_open()){
+			file<<output;
+			file.close();
+		}
+		else{
+			cerr<<"could not open file";
+		}
 	}
 
 	return 0;
