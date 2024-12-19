@@ -9,7 +9,7 @@ using namespace std;
 
 
 int main(){
-	string message, encrypted, key;
+		string message, encrypted, key;
 	int option;
 
 	do{
@@ -31,15 +31,14 @@ int main(){
 				switch(option){
 					case 1:
 					cout<<"Please Enter The Key For The Cipher: ";
-					cin.ignore();
 					getline(cin,key);
-					cout << vigenereEncryptor(message, key);
+					encrypted = vigenereEncryptor(message, key);
 					break;
 					case 2:
-					caesarEncryptor(message);
+					encrypted = caesarEncryptor(message);
 					break;
 					case 3:
-					XOREncryptorDecryptor(message);
+					encrypted = XOREncryptorDecryptor(message);
 
 					break;
 					default: 
@@ -66,13 +65,13 @@ int main(){
 					case 1:
 					cout<<"Please Enter The Key For The Cipher: ";
 					getline(cin,key);
-					vigenereDecryptor(message, key);
+					encrypted = vigenereDecryptor(message, key);
 					break;
 					case 2:
-					caesarDecryptor(message);
+					encrypted = caesarDecryptor(message);
 					break;
 					case 3:
-					XOREncryptorDecryptor(message);
+					encrypted = XOREncryptorDecryptor(message);
 
 					break;
 					default: 
@@ -91,5 +90,6 @@ int main(){
 		}
 	}while(option==5);
 
+	return 0;
 
 }
