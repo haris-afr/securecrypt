@@ -19,8 +19,7 @@ string caesarEncryptor(string message){
 		if (encrypted_letter_index < 0){
 			encrypted_letter_index += 26;
 		}
-		cout << alphabet[encrypted_letter_index];
-		encrypted[messageIndex] = alphabet[encrypted_letter_index];
+		encrypted.push_back(alphabet[encrypted_letter_index]);
 	}
 	return encrypted;
 	
@@ -43,8 +42,7 @@ string caesarDecryptor(string message){
 		if (decrypted_letter_index > 25){
 			decrypted_letter_index -= 26;
 		}
-		cout << alphabet[decrypted_letter_index];
-		decrypted[messageIndex] = alphabet[decrypted_letter_index];
+		decrypted.push_back(alphabet[decrypted_letter_index]);
 	}
 	
 	return decrypted;
